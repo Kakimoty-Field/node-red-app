@@ -21,13 +21,9 @@ const IBMCloudEnv = require('ibm-cloud-env');
 IBMCloudEnv.init('/server/config/mappings.json');
 
 var VCAP = process.env.VCAP_SERVICES;
-console.log("VCA  ---", VCAP);
 var cloudantEnv = VCAP ? JSON.parse(VCAP)['cloudantNoSQLDB'] : null;
-console.log("CLO  ---", cloudantEnv);
 var credential = cloudantEnv?.length ? cloudantEnv[0].credentials : null;
-console.log("CRE  --- ", credential);
 const cloudantUrl = credential?.url || IBMCloudEnv.getString('cloudant_url');
-console.log("URL  --- ",   cloudantUrl);
 
 const REGEX_LEADING_ALPHA = /^[^a-zA-Z]*/;
 const REGEX_ALPHA_NUM = /[^a-zA-Z0-9]/g;
